@@ -17,6 +17,7 @@ unicode_tbl = {
     "β": "beta",
     "χ": "chi",
     "δ": "delta",
+    "÷": "/",
     "ε": "epsilon",
     "γ": "gamma",
     "ψ": "psi",
@@ -301,7 +302,7 @@ class LatexVisitor(ast.NodeVisitor):
         """Special features:
         - Recognize underscripts in identifiers names (default: underscore)
         - Recognize upperscripts in identifiers names (default: ˆ, valid in Python3)
-        Note that using ˆ is not recommanded in variable names because it may
+        Note that using ˆ is not recommended in variable names because it may
         be confused with the operator ^, but in some special cases of extensively
         long formulas with lots of indices, it may help the readability of the
         code
@@ -603,6 +604,8 @@ class LatexVisitor(ast.NodeVisitor):
         if self.simplify_fractions:
             if any([n.n == key for key in fracs.keys()]):
                 return r"{0}\frac{{{1}}}{{{2}}}".format(*fracs[n.n])
+        if n.n == 2146136747:  # Magic number to handle ÷ symbol
+            return "\div"
         if self.looks_like_int(n.n):
             return "%d" % n.n
         return str(n.n)

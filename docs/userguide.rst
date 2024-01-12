@@ -111,6 +111,98 @@ identifiers in their Unicode equivalent::
 .. math::
     \arcsin(\alpha)
 
+.. list-table:: Supported Unicode Characters
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Character
+     - Name
+     - As chr()
+   * - α
+     - alpha
+     - chr(945)
+   * - β
+     - beta
+     - chr(946)
+   * - χ
+     - chi
+     - chr(967)
+   * - δ
+     - delta
+     - chr(916)
+   * - ÷
+     - division
+     - chr(247)
+   * - ε
+     - epsilon
+     - chr(949)
+   * - γ
+     - gamma
+     - chr(947)
+   * - ψ
+     - psi
+     - chr(968)
+   * - θ
+     - theta
+     - chr(952)
+   * - κ
+     - kappa
+     - chr(954)
+   * - λ
+     - lambda
+     - chr(955)
+   * - lambda
+     - lambda
+     - chr(955)
+   * - η
+     - eta
+     - chr(951)
+   * - ν
+     - nu
+     - chr(957)
+   * - π
+     - pi
+     - chr(960)
+   * - ϕ
+     - phi
+     - chr(981)
+   * - σ
+     - omega
+     - chr(963)
+   * - τ
+     - tau
+     - chr(964)
+   * - ω
+     - omega
+     - chr(969)
+   * - ξ
+     - xi
+     - chr(958)
+   * - Δ
+     - Delta
+     - chr(916)
+   * - φ
+     - Phi
+     - chr(966)
+   * - Γ
+     - Gamma
+     - chr(915)
+   * - Ψ
+     - Psi
+     - chr(936)
+   * - α
+     - alpha
+     - chr(945)
+   * - Λ
+     - Lambda
+     - chr(923)
+   * - Σ
+     - Sigma
+     - chr(931)
+   * - Ξ
+     - Xi
+     - chr(926)
+
 - there is a mode to output Python expressions in Word syntax. From version 2007
   Word converts most LaTeX expressions in its own graphical representation. The
   Word mode here was just about replacing those LaTeX {} with Word ()::
@@ -142,6 +234,23 @@ the ``output='word'`` option of :func:`~pytexit.pytexit.py2tex`::
 
 The latest output will typically replace all brackets {} with parenthesis () that are correctly
 interpreted by Word, and keep keywords that are correctly evaluated by Word (`\pi` or `\cdot`)
+
+By default, you have the option to enable/diable printing the given formula or the LaTeX, by passing your
+preferences as parameters to the ``pytexit.py2tex``::
+    
+    from pytexit import py2tex
+    py2tex(r'4*sqrt(2*pi*R)',print_formula = False,print_latex = True)
+
+You can also set them globaly by changing ``pytexit.PRINT_FORMULA`` or ``pytexit.PRINT_LATEX``. their values determine
+what will happen when you don't override them when calling the function. For Example::
+    
+    import pytexit
+    pytexit.py2tex(r'x=1.0d-2') # both formula and LaTeX will be printed 
+    pytexit.py2tex(r'4*sqrt(2*pi*R)',print_formula = False,print_latex = True) # only LaTeX will be printed
+
+    pytexit.PRINT_FORMULA, pytexit.PRINT_LATEX = True, False
+    pytexit.py2tex(r'a=3.2d0+3d1') # only formula will be printed
+    pytexit.py2text(r'2*sqrt(2*pi*k*T_e/m_e)*(DeltaE/(k*T_e))**2*a_0**2',print_formula = False) # nothing will be printed
 
 
 References
